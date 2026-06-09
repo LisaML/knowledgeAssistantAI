@@ -34,7 +34,28 @@ public class BusinessRecordsController : ControllerBase
 
         return Ok(record);
     }
+    [HttpGet("search")]
+    public async Task<IActionResult> Search([FromQuery] string term)
+    {
+        var results = await _context.BusinessRecords
+            .Where(r =>
+                r.Title.Contains(term) ||
+                r.Content.Contains(term) ||
+                r.Department.Contains(term))
+            .ToListAsync();
 
+        return Ok(results);
+    }
+
+    [HttpGet("filter")]
+    public async Task<IActionResult> FilterByDepartment([FromQuery] string department)
+    {
+        var results = await _context.BusinessRecords
+            .Where(r => r.Department == department)
+            .ToListAsync();
+
+        return Ok(results);
+    }
     [HttpPost]
     public async Task<IActionResult> Create(
         BusinessRecord record)
