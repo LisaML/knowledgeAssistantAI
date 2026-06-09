@@ -1,0 +1,10 @@
+<h2>Registros Empresariales</h2>
+
+<p>Total: {{ records.length }}</p>
+
+<div *ngFor="let record of records">
+  <h3>{{ record.title }}</h3>
+  <p>{{ record.content }}</p>
+  <small>{{ record.department }}</small>
+  <hr>
+</div>

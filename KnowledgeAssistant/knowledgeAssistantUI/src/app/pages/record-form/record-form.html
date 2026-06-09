@@ -1,0 +1,66 @@
+<h1>Nuevo Registro</h1>
+
+<div>
+
+    <label>Título</label>
+
+    <br>
+
+    <input
+        type="text"
+        [(ngModel)]="record.title">
+
+</div>
+
+<br>
+
+<div>
+
+    <label>Contenido</label>
+
+    <br>
+
+    <textarea
+        rows="5"
+        cols="50"
+        [(ngModel)]="record.content">
+
+    </textarea>
+
+</div>
+
+<br>
+
+<div>
+
+    <label>Departamento</label>
+
+    <br>
+
+    <select
+        [(ngModel)]="record.department">
+
+        <option value="RH">RH</option>
+
+        <option value="Ventas">Ventas</option>
+
+        <option value="Producción">Producción</option>
+
+        <option value="Calidad">Calidad</option>
+
+        <option value="TI">TI</option>
+
+        <option value="Finanzas">Finanzas</option>
+
+    </select>
+
+</div>
+
+<br>
+
+<button
+    (click)="save()">
+
+    Guardar
+
+</button>

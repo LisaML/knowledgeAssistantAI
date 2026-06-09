@@ -1,0 +1,25 @@
+<h1>Chat con IA</h1>
+
+<p>
+  Pregunta sobre la información registrada en la plataforma.
+</p>
+
+<textarea
+  rows="4"
+  cols="70"
+  [(ngModel)]="question"
+  placeholder="Ejemplo: ¿Qué registros hablan sobre calidad?">
+</textarea>
+
+<br><br>
+
+<button (click)="ask()" [disabled]="loading">
+  {{ loading ? 'Consultando...' : 'Preguntar' }}
+</button>
+
+<hr>
+
+<div *ngIf="answer">
+  <h3>Respuesta de Gemini</h3>
+  <p>{{ answer }}</p>
+</div>
