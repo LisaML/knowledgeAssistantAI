@@ -1,1 +1,34 @@
-<p>dashboard works!</p>
+<section class="dashboard">
+
+  <div class="hero">
+    <h1>Knowledge Assistant AI</h1>
+    <p>
+      Plataforma interna para registrar, consultar y enriquecer información empresarial mediante Inteligencia Artificial.
+    </p>
+
+    <div class="actions">
+      <a routerLink="/records">Ver Registros</a>
+      <a routerLink="/chat">Preguntar a Gemini</a>
+    </div>
+  </div>
+
+  <div class="stats">
+
+    <div class="stat-card">
+      <h2>{{ totalRecords }}</h2>
+      <p>Registros almacenados</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>{{ totalDepartments }}</h2>
+      <p>Departamentos activos</p>
+    </div>
+
+    <div class="stat-card">
+      <h2>Gemini</h2>
+      <p>Proveedor de IA integrado</p>
+    </div>
+
+  </div>
+
+</section>

@@ -1,0 +1,32 @@
+.chat-page{
+    padding:40px;
+}
+
+.chat-card{
+    max-width:900px;
+    margin:auto;
+    background:white;
+    padding:30px;
+    border-radius:20px;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.chat-card h1{
+    color:#1e40af;
+}
+
+button{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:12px 18px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+.response{
+    margin-top:25px;
+    background:#f3f4f6;
+    padding:20px;
+    border-radius:15px;
+}

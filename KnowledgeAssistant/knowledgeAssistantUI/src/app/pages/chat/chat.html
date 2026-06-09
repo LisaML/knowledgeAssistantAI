@@ -1,25 +1,39 @@
-<h1>Chat con IA</h1>
+<section class="chat-page">
 
-<p>
-  Pregunta sobre la información registrada en la plataforma.
-</p>
+  <div class="chat-card">
 
-<textarea
-  rows="4"
-  cols="70"
-  [(ngModel)]="question"
-  placeholder="Ejemplo: ¿Qué registros hablan sobre calidad?">
-</textarea>
+    <h1>Chat con Gemini AI</h1>
 
-<br><br>
+    <p>
+      Haz preguntas sobre la información registrada en la plataforma.
+    </p>
 
-<button (click)="ask()" [disabled]="loading">
-  {{ loading ? 'Consultando...' : 'Preguntar' }}
-</button>
+    <textarea
+      rows="5"
+      [(ngModel)]="question"
+      placeholder="Ejemplo: ¿Qué registros hablan sobre calidad?">
+    </textarea>
 
-<hr>
+    <br><br>
 
-<div *ngIf="answer">
-  <h3>Respuesta de Gemini</h3>
-  <p>{{ answer }}</p>
-</div>
+    <button
+      (click)="ask()"
+      [disabled]="loading">
+
+      {{ loading ? 'Consultando...' : 'Preguntar' }}
+
+    </button>
+
+    <div class="response" *ngIf="answer">
+
+      <h2>Respuesta de Gemini</h2>
+
+      <p>
+        {{ answer }}
+      </p>
+
+    </div>
+
+  </div>
+
+</section>

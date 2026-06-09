@@ -1,66 +1,49 @@
-<h1>Nuevo Registro</h1>
+<section class="form-page">
 
-<div>
+    <div class="form-card">
 
-    <label>Título</label>
+        <h1>Nuevo Registro</h1>
 
-    <br>
+        <label>Título</label>
 
-    <input
-        type="text"
-        [(ngModel)]="record.title">
+        <input
+            type="text"
+            [(ngModel)]="record.title">
 
-</div>
+        <br><br>
 
-<br>
+        <label>Contenido</label>
 
-<div>
+        <textarea
+            rows="6"
+            [(ngModel)]="record.content">
+        </textarea>
 
-    <label>Contenido</label>
+        <br><br>
 
-    <br>
+        <label>Departamento</label>
 
-    <textarea
-        rows="5"
-        cols="50"
-        [(ngModel)]="record.content">
+        <select
+            [(ngModel)]="record.department">
 
-    </textarea>
+            <option value="RH">RH</option>
+            <option value="Ventas">Ventas</option>
+            <option value="Producción">Producción</option>
+            <option value="Calidad">Calidad</option>
+            <option value="TI">TI</option>
+            <option value="Finanzas">Finanzas</option>
 
-</div>
+        </select>
 
-<br>
+        <br><br>
 
-<div>
+        <button
+            (click)="save()">
 
-    <label>Departamento</label>
+            Guardar Registro
 
-    <br>
+        </button>
 
-    <select
-        [(ngModel)]="record.department">
+    </div>
 
-        <option value="RH">RH</option>
-
-        <option value="Ventas">Ventas</option>
-
-        <option value="Producción">Producción</option>
-
-        <option value="Calidad">Calidad</option>
-
-        <option value="TI">TI</option>
-
-        <option value="Finanzas">Finanzas</option>
-
-    </select>
-
-</div>
-
-<br>
-
-<button
-    (click)="save()">
-
-    Guardar
-
-</button>
+</section>

@@ -7,6 +7,15 @@ export interface AskResponse {
   answer: string;
 }
 
+export interface AIAnalysis {
+  id: number;
+  businessRecordId: number;
+  summary: string;
+  classification: string;
+  recommendations: string;
+  createdAt: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -18,11 +27,11 @@ export class AiService {
 
   ask(question: string): Observable<AskResponse> {
     return this.http.post<AskResponse>(`${this.apiUrl}/ask`, {
-      question: question
+      question
     });
   }
 
-  analyze(recordId: number): Observable<any> {
-    return this.http.post(`${this.apiUrl}/analyze/${recordId}`, {});
+  analyze(recordId: number): Observable<AIAnalysis> {
+    return this.http.post<AIAnalysis>(`${this.apiUrl}/analyze/${recordId}`, {});
   }
 }

@@ -1,10 +1,53 @@
-<h2>Registros Empresariales</h2>
+<section class="page">
 
-<p>Total: {{ records.length }}</p>
+  <div class="header">
+    <div>
+      <h1>Registros Empresariales</h1>
+      <p>Administra información interna y analízala con Gemini.</p>
+    </div>
 
-<div *ngFor="let record of records">
-  <h3>{{ record.title }}</h3>
-  <p>{{ record.content }}</p>
-  <small>{{ record.department }}</small>
-  <hr>
-</div>
+    <a class="button-primary" routerLink="/create">
+      Nuevo Registro
+    </a>
+  </div>
+
+  <div class="grid">
+
+    <div class="card" *ngFor="let record of records">
+
+      <div class="card-header">
+        <h2>{{ record.title }}</h2>
+        <span>{{ record.department }}</span>
+      </div>
+
+      <p class="content">
+        {{ record.content }}
+      </p>
+
+      <button
+        class="button-secondary"
+        (click)="analyze(record.id)"
+        [disabled]="loadingRecordId === record.id">
+
+        {{ loadingRecordId === record.id ? 'Analizando...' : 'Analizar con IA' }}
+
+      </button>
+
+      <div class="analysis" *ngIf="record.id && analyses[record.id]">
+
+        <h3>Resumen</h3>
+        <p>{{ analyses[record.id].summary }}</p>
+
+        <h3>Clasificación</h3>
+        <p>{{ analyses[record.id].classification }}</p>
+
+        <h3>Recomendaciones</h3>
+        <p>{{ analyses[record.id].recommendations }}</p>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
