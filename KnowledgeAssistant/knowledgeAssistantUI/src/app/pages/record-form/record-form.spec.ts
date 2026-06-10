@@ -1,4 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
 
 import { RecordForm } from './record-form';
 
@@ -9,11 +11,15 @@ describe('RecordForm', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [RecordForm],
+      providers: [
+        provideHttpClient(),
+        provideRouter([])
+      ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(RecordForm);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {

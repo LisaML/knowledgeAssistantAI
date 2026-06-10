@@ -62,14 +62,22 @@ public class BusinessRecordsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(
         BusinessRecord record)
-    {_logger.LogInformation(
-    "Creating business record with title {Title}",
-    record.Title);
+    {
+        _logger.LogInformation(
+            "Creating business record with title {Title}",
+            record.Title);
+
+        if (!ModelState.IsValid)
+            return BadRequest(ModelState);
+
         _context.BusinessRecords.Add(record);
 
         await _context.SaveChangesAsync();
 
-        return Ok(record);
+        return CreatedAtAction(
+            nameof(Get),
+            new { id = record.Id },
+            record);
     }
 
     [HttpPut("{id}")]
