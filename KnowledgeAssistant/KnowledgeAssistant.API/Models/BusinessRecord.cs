@@ -1,14 +1,21 @@
+using System.ComponentModel.DataAnnotations;
+
 namespace KnowledgeAssistant.API.Models;
 
 public class BusinessRecord
 {
     public int Id { get; set; }
 
-    public string Title { get; set; } = "";
+    [Required]
+    [MaxLength(100)]
+    public string Title { get; set; } = string.Empty;
 
-    public string Content { get; set; } = "";
+    [Required]
+    public string Content { get; set; } = string.Empty;
 
-    public string Department { get; set; } = "";
+    [Required]
+    [MaxLength(50)]
+    public string Department { get; set; } = string.Empty;
 
-    public DateTime CreatedAt { get; set; }
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

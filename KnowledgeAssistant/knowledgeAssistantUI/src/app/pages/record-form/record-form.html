@@ -2,13 +2,14 @@
 
     <div class="form-card">
 
-        <h1>Nuevo Registro</h1>
+        <h1>{{ isEditMode ? 'Editar Registro' : 'Nuevo Registro' }}</h1>
 
         <label>Título</label>
 
         <input
             type="text"
-            [(ngModel)]="record.title">
+            [(ngModel)]="record.title"
+             required>
 
         <br><br>
 
@@ -16,7 +17,8 @@
 
         <textarea
             rows="6"
-            [(ngModel)]="record.content">
+            [(ngModel)]="record.content"
+             required>
         </textarea>
 
         <br><br>
@@ -24,7 +26,8 @@
         <label>Departamento</label>
 
         <select
-            [(ngModel)]="record.department">
+            [(ngModel)]="record.department"
+             required>
 
             <option value="RH">RH</option>
             <option value="Ventas">Ventas</option>
