@@ -1,6 +1,7 @@
 using KnowledgeAssistant.API.Data;
 using Microsoft.EntityFrameworkCore;
 using KnowledgeAssistant.API.Services;
+using KnowledgeAssistant.API.Services.Background;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +9,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IAIService, GeminiAIService>();
+builder.Services.AddHostedService<AIAnalysisBackgroundService>();
 builder.Services.AddControllers();
 
 builder.Services.AddEndpointsApiExplorer();
