@@ -14,4 +14,13 @@ public class ApplicationDbContext : DbContext
     public DbSet<BusinessRecord> BusinessRecords => Set<BusinessRecord>();
 
     public DbSet<AIAnalysis> AIAnalyses => Set<AIAnalysis>();
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<AIAnalysis>()
+            .HasOne(a => a.BusinessRecord)
+            .WithMany()
+            .HasForeignKey(a => a.BusinessRecordId)
+            .OnDelete(DeleteBehavior.Cascade);
+    }
 }

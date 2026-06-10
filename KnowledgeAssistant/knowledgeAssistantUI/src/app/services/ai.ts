@@ -23,7 +23,7 @@ export class AiService {
 
   private http = inject(HttpClient);
 
-  private apiUrl = 'http://localhost:5020/api/AI';
+  private apiUrl = 'http://localhost:5020/api/v1/AI';
 
   ask(question: string): Observable<AskResponse> {
     return this.http.post<AskResponse>(`${this.apiUrl}/ask`, {

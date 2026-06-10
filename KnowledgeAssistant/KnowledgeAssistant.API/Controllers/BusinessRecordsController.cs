@@ -6,15 +6,18 @@ using KnowledgeAssistant.API.Models;
 namespace KnowledgeAssistant.API.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/v1/[controller]")]
 public class BusinessRecordsController : ControllerBase
 {
     private readonly ApplicationDbContext _context;
+    private readonly ILogger<BusinessRecordsController> _logger;
 
     public BusinessRecordsController(
-        ApplicationDbContext context)
+        ApplicationDbContext context,
+        ILogger<BusinessRecordsController> logger)
     {
         _context = context;
+        _logger = logger;
     }
 
     [HttpGet]
@@ -59,7 +62,9 @@ public class BusinessRecordsController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> Create(
         BusinessRecord record)
-    {
+    {_logger.LogInformation(
+    "Creating business record with title {Title}",
+    record.Title);
         _context.BusinessRecords.Add(record);
 
         await _context.SaveChangesAsync();
@@ -85,7 +90,9 @@ public class BusinessRecordsController : ControllerBase
 
     [HttpDelete("{id}")]
     public async Task<IActionResult> Delete(int id)
-    {
+    {_logger.LogInformation(
+    "Deleting business record with id {Id}",
+    id);
         var record =
             await _context.BusinessRecords.FindAsync(id);
 

@@ -11,43 +11,141 @@
     </a>
   </div>
 
-  <div class="grid">
+  <div class="toolbar">
 
-    <div class="card" *ngFor="let record of records">
+    <input
+      type="text"
+      placeholder="Buscar..."
+      [(ngModel)]="searchTerm">
 
-      <div class="card-header">
-        <h2>{{ record.title }}</h2>
-        <span>{{ record.department }}</span>
-      </div>
+    <button class="button-secondary" (click)="search()">
+      Buscar
+    </button>
 
-      <p class="content">
-        {{ record.content }}
-      </p>
+    <select [(ngModel)]="selectedDepartment" (change)="filter()">
+      <option value="">Todos</option>
 
-      <button
+      <option *ngFor="let dep of departments" [value]="dep">
+        {{ dep }}
+      </option>
+    </select>
+
+  </div>
+
+  <div class="table-card">
+
+    <table>
+
+        <thead>
+        <tr>
+            <th>Título</th>
+            <th>Departamento</th>
+            <th>Contenido</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        <tr *ngFor="let record of paginatedRecords">
+
+            <td>{{ record.title }}</td>
+
+            <td>
+            <span class="badge">
+                {{ record.department }}
+            </span>
+            </td>
+
+            <td>{{ record.content }}</td>
+
+            <td>
+            <div class="actions">
+
+                <a
+                class="button-primary"
+                [routerLink]="['/edit', record.id]">
+
+                Editar
+
+                </a>
+
+                <button
+                class="button-secondary"
+                (click)="analyze(record.id)"
+                [disabled]="loadingRecordId === record.id">
+
+                {{ loadingRecordId === record.id ? 'Analizando...' : 'Analizar IA' }}
+
+                </button>
+
+                <button
+                class="button-danger"
+                (click)="deleteRecord(record.id)">
+
+                Eliminar
+
+                </button>
+
+            </div>
+            </td>
+
+        </tr>
+
+        </tbody>
+
+    </table>
+
+    <div class="pagination">
+
+        <button
         class="button-secondary"
-        (click)="analyze(record.id)"
-        [disabled]="loadingRecordId === record.id">
+        (click)="previousPage()"
+        [disabled]="currentPage === 1">
 
-        {{ loadingRecordId === record.id ? 'Analizando...' : 'Analizar con IA' }}
+        Anterior
 
-      </button>
+        </button>
 
-      <div class="analysis" *ngIf="record.id && analyses[record.id]">
+        <span>
+        Página {{ currentPage }} de {{ totalPages || 1 }}
+        </span>
 
-        <h3>Resumen</h3>
-        <p>{{ analyses[record.id].summary }}</p>
+        <button
+        class="button-secondary"
+        (click)="nextPage()"
+        [disabled]="currentPage === totalPages || totalPages === 0">
 
-        <h3>Clasificación</h3>
-        <p>{{ analyses[record.id].classification }}</p>
+        Siguiente
 
-        <h3>Recomendaciones</h3>
-        <p>{{ analyses[record.id].recommendations }}</p>
-
-      </div>
+        </button>
 
     </div>
 
-  </div>
+    </div>
+    <div class="analysis-list">
+
+  <div
+        class="analysis"
+        *ngFor="let record of paginatedRecords">
+
+        <div *ngIf="record.id && analyses[record.id]">
+
+        <h3>Análisis IA: {{ record.title }}</h3>
+
+        <strong>Resumen</strong>
+        <p>{{ analyses[record.id].summary }}</p>
+
+        <strong>Clasificación</strong>
+        <p>{{ analyses[record.id].classification }}</p>
+
+        <strong>Recomendaciones</strong>
+        <p>{{ analyses[record.id].recommendations }}</p>
+
+        </div>
+
+    </div>
+
+    </div>
 
 </section>

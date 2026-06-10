@@ -9,6 +9,7 @@ export const routes: Routes = [
     path: '',
     component: Dashboard
   },
+  
   {
     path: 'records',
     component: Records
@@ -18,7 +19,12 @@ export const routes: Routes = [
     component: RecordForm
   },
   {
+    path: 'edit/:id',
+    component: RecordForm
+    },
+  {
     path: 'chat',
     component: Chat
   }
+  
 ];
