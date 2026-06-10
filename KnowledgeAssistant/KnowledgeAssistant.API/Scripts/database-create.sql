@@ -53,3 +53,26 @@ VALUES (N'20260610001953_ConfigureAIAnalysisRelation', N'10.0.9');
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+DECLARE @var nvarchar(max);
+SELECT @var = QUOTENAME([d].[name])
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[BusinessRecords]') AND [c].[name] = N'Title');
+IF @var IS NOT NULL EXEC(N'ALTER TABLE [BusinessRecords] DROP CONSTRAINT ' + @var + ';');
+ALTER TABLE [BusinessRecords] ALTER COLUMN [Title] nvarchar(100) NOT NULL;
+
+DECLARE @var1 nvarchar(max);
+SELECT @var1 = QUOTENAME([d].[name])
+FROM [sys].[default_constraints] [d]
+INNER JOIN [sys].[columns] [c] ON [d].[parent_column_id] = [c].[column_id] AND [d].[parent_object_id] = [c].[object_id]
+WHERE ([d].[parent_object_id] = OBJECT_ID(N'[BusinessRecords]') AND [c].[name] = N'Department');
+IF @var1 IS NOT NULL EXEC(N'ALTER TABLE [BusinessRecords] DROP CONSTRAINT ' + @var1 + ';');
+ALTER TABLE [BusinessRecords] ALTER COLUMN [Department] nvarchar(50) NOT NULL;
+
+INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+VALUES (N'20260610141149_FinalModelValidationUpdates', N'10.0.9');
+
+COMMIT;
+GO
+
